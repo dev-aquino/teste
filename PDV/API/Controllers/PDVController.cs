@@ -32,5 +32,18 @@ namespace API.Controllers
                 throw;
             }
         }
+
+        [HttpGet("ConsultaTransacoesDeTroco")]
+        public ConsultaTransacoesDeTrocoResponse ConsultaTransacoesDeTroco()
+        {
+            try
+            {
+                return _pdvService.ConsultarTransacoesDeTroco();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

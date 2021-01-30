@@ -8,5 +8,7 @@ namespace Application.Interfaces
     public interface IPdvService
     {
         GerarTrocoResponse GerarTroco(decimal valorTotal, decimal valorPago);
+
+        ConsultaTransacoesDeTrocoResponse ConsultarTransacoesDeTroco();
     }
 }

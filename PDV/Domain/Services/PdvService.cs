@@ -13,6 +13,13 @@ namespace Domain.Services
         private readonly IList<decimal> _listaNotasEMoedas = new List<decimal> { 0.01m, 0.05m, 0.1m, 0.5m, 10m, 20m, 50m, 100m };
         private decimal valoreRestante = 0;
 
+        private readonly IPdvRepository _pdvRepository;
+
+        public PdvService(IPdvRepository pdvRepository)
+        {
+            _pdvRepository = pdvRepository;
+        }
+
         public GerarTrocoResponse GerarTroco(decimal valorTotal, decimal valorPago)
         {
             var result = new GerarTrocoResponse();
@@ -41,6 +48,21 @@ namespace Domain.Services
             };
             
             result.InformativoTroco = GerarInformativoTroco(troco);
+
+            var transacaoDeTroco = new TransacaoDeTroco(valorTotal, valorPago, valorParaTroco, result.InformativoTroco, DateTime.Now);
+            _pdvRepository.RegistrarSaidaDeCaixa(transacaoDeTroco);
+
+            return result;
+        }
+
+        public ConsultaTransacoesDeTrocoResponse ConsultarTransacoesDeTroco()
+        {
+            var result = new ConsultaTransacoesDeTrocoResponse();
+            result.Transacoes = _pdvRepository.ObterSaidasDeCaixa();
+            if (result.Transacoes.Count() == 0)
+            {
+                result.Notificacao = "Nenhuma saida de caixa registrada";
+            }
 
             return result;
         }

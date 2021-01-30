@@ -1,9 +1,12 @@
 using Application.Interfaces;
 using Domain.Services;
+using Infrastructure.Database.Contexts;
+using Infrastructure.Database.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +31,9 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<SqlServerContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("PdvConnection")));
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -41,6 +47,7 @@ namespace API
             });
 
             services.AddScoped<IPdvService, PdvService>();
+            services.AddScoped<IPdvRepository, PdvRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
