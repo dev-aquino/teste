@@ -15,6 +15,12 @@ namespace Infrastructure.Database.Entities
             DataTransacao = dataTransacao;
         }
 
+        //contrutor para o dapper
+        private SaidaDeCaixa()
+        {
+
+        }
+
         public int Id { get; private set; }
         public decimal ValorTotal { get; private set; }
         public decimal ValorPago { get; private set; }
