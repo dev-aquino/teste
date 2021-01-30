@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/PDV/.vs/PDV
+/PDV/API/bin/Debug/netcoreapp3.1
+/PDV/API/obj
+/PDV/Core/bin/Debug/netcoreapp3.1
+/PDV/Core/obj
+/PDV/Domain/bin/Debug/netcoreapp3.1
+/PDV/Domain/obj
+/PDV/Infrastructure/bin/Debug/netcoreapp3.1
+/PDV/Infrastructure/obj
