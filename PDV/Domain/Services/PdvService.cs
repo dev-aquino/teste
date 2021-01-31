@@ -112,12 +112,12 @@ namespace Domain.Services
             var result = "Entregar ";
             foreach (var nota in troco.Notas)
             {
-                result += $"{nota.Value} nota(s) de R${nota.Key} / ";
+                result += $"{nota.Value} nota(s) de R${nota.Key.ToString("C2")} / ";
             }
 
             foreach (var moeda in troco.Moedas)
             {
-                result += $"{moeda.Value} moeda(s) de R${moeda.Key} / ";
+                result += $"{moeda.Value} moeda(s) de R${moeda.Key.ToString("C2")} / ";
             }
 
             return result;
