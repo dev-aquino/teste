@@ -9,5 +9,6 @@ namespace Application.DTOs
         public string InformativoValorTotal { get; set; }
         public string InformativoValorPago { get; set; }
         public string InformativoTroco { get; set; }
+        public DateTime DataTransacao { get; set; }
     }
 }

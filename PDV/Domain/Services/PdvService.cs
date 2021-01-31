@@ -50,8 +50,9 @@ namespace Domain.Services
             };
             
             result.InformativoTroco = GerarInformativoTroco(troco);
+            result.DataTransacao = DateTime.Now;
 
-            var transacaoDeTroco = new TransacaoDeTroco(valorTotal, valorPago, valorParaTroco, result.InformativoTroco, DateTime.Now);
+            var transacaoDeTroco = new TransacaoDeTroco(valorTotal, valorPago, valorParaTroco, result.InformativoTroco, result.DataTransacao);
             _pdvRepository.RegistrarSaidaDeCaixa(transacaoDeTroco);
 
             return result;

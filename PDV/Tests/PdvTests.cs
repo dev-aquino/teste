@@ -20,7 +20,7 @@ namespace Tests
 
         [TestMethod]
         [DataRow(99.73, 100)]
-        public void DEVE_RETORNAR_COMO_TROCO_DUAS_MOEDAS_DE_DEZ_UMA_DE_CINCO_E_DUAS_DE_UM(dynamic param01, dynamic param02)
+        public void DEVE_RETORNAR_COMO_TROCO_DUAS_MOEDAS_DE_UM_UMA_MOEDA_DE_CINCO_E_DUAS_MOEDAS_DE_DEZ(dynamic param01, dynamic param02)
         {
             var resultMethod = _pdvService.GerarTroco(Convert.ToDecimal(param01), Convert.ToDecimal(param02));
             var result = resultMethod.InformativoTroco == "Entregar 2 moeda(s) de R$0,01 / 1 moeda(s) de R$0,05 / 2 moeda(s) de R$0,1 / ";
@@ -33,9 +33,9 @@ namespace Tests
         public void VERIFICA_SE_A_SAIDA_DE_CAIXA_FOI_PERSISTIDA(dynamic param01, dynamic param02)
         {
             var valorTroco = Decimal.Round(Convert.ToDecimal(param02 - param01), 2);
-            var resultMethod1 = _pdvService.GerarTroco(param01, param02);
+            var resultMethod1 = _pdvService.GerarTroco(Convert.ToDecimal(param01), Convert.ToDecimal(param02));
             var resultMethod2 = _pdvService.ConsultarTransacoesDeTroco();
-            var result = resultMethod2.Transacoes.Any(x => x.ValorTotal == param01 && x.ValorPago == param02 && x.ValorTroco == valorTroco);
+            var result = resultMethod2.Transacoes.Any(x => x.ValorTotal == param01 && x.ValorPago == param02 && x.ValorTroco == valorTroco && DateTime.Equals(x.DataTransacao, resultMethod1.DataTransacao));
 
             Assert.IsTrue(result);
         }
