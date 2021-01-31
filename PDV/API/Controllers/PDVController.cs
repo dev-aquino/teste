@@ -20,29 +20,32 @@ namespace API.Controllers
             _pdvService = pdvService;
         }
 
+
         [HttpPost("GeraTroco")]
-        public GerarTrocoResponse GeraTroco([FromBody] GerarTrocoRequest gerarTrocoRequestDTO)
+        public ActionResult<GerarTrocoResponse> GeraTroco([FromBody] GerarTrocoRequest gerarTrocoRequestDTO)
         {
             try
             {
-                return _pdvService.GerarTroco(gerarTrocoRequestDTO.ValorTotal, gerarTrocoRequestDTO.ValorPago);
+                var response = _pdvService.GerarTroco(gerarTrocoRequestDTO.ValorTotal, gerarTrocoRequestDTO.ValorPago);
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
 
         [HttpGet("ConsultaTransacoesDeTroco")]
-        public ConsultaTransacoesDeTrocoResponse ConsultaTransacoesDeTroco()
+        public ActionResult<ConsultaTransacoesDeTrocoResponse> ConsultaTransacoesDeTroco()
         {
             try
             {
-                return _pdvService.ConsultarTransacoesDeTroco();
+                var response = _pdvService.ConsultarTransacoesDeTroco();
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                throw;
+                return StatusCode(500, ex.Message);
             }
         }
     }

@@ -72,7 +72,7 @@ namespace API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.RoutePrefix = string.Empty; // para o swagger UI seja exibido na URL raiz (https://localhost:44355/)
+                c.RoutePrefix = string.Empty; // para o swagger UI seja exibido na URL raiz
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
         }

@@ -29,12 +29,14 @@ namespace Domain.Services
             if (valorPago < valorTotal)
             {
                 result.Notificacao = "O valor pago deve ser igual ou maior que o valor total";
+                return result;
             }
 
             var valorParaTroco = valorPago - valorTotal;
             if (valorParaTroco == 0)
             {
                 result.Notificacao = "Não precisa de troco";
+                return result;
             }
 
             var dicionarioDeTroco = PrepararDicionarioDeTroco(_listaNotasEMoedas);
